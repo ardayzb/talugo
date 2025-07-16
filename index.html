@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>TaluGo</title>
+  <link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'><link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="app-container">
+
+    <header>
+        <div class="logo">TaluGo 🇪🇪</div>
+    </header>
+
+    <main id="discover-page" class="page">
+        <h1>Find Local Farms & Fresh Products in Estonia</h1>
+        <p>Find farms near you producing and selling honey, eggs, dairy, and more. Connect directly with local producers for the freshest products.</p>
+
+        <div class="search-area">
+            <input type="text" placeholder="🔍 Type to search or tap on products 👇">
+        </div>
+        <div id="tags-container"></div>
+
+
+        <h2 id="farms-heading">All Farms</h2>
+        <div id="status-container"></div>
+        <div id="farm-list-container"></div>
+    </main>
+
+  <div id="details-page" class="page" style="display: none;">
+    </div>
+  
+    <div id="map-page" class="page" style="display: none;">
+    <div id="map"></div>
+</div>
+
+    <div id="favorites-page" class="page" style="display: none;">
+        <h2>My Favorites</h2>
+        <p>Coming soon!</p>
+    </div>
+
+    <div id="profile-page" class="page" style="display: none;">
+    
+    <div id="auth-container">
+        <form id="signup-form">
+            <h3>Create an Account</h3>
+            <input type="email" id="signup-email" placeholder="Email" required>
+            <input type="password" id="signup-password" placeholder="Password" required>
+            <button type="submit">Sign Up</button>
+        </form>
+
+        <hr class="form-divider">
+
+        <form id="login-form">
+            <h3>Log In</h3>
+            <input type="email" id="login-email" placeholder="Email" required>
+            <input type="password" id="login-password" placeholder="Password" required>
+            <button type="submit">Log In</button>
+        </form>
+    </div>
+
+    <div id="profile-details-container" style="display: none;">
+        <h2>My Profile</h2>
+        <p id="user-email-display">Welcome!</p>
+        <button id="logout-button">Log Out</button>
+    </div>
+
+    <div id="auth-message"></div>
+
+</div>
+
+
+    <footer>
+        <nav>
+            <a href="#" class="nav-link active" data-page="discover-page">
+                <div>🏠</div>
+                <div>Discover</div>
+            </a>
+            <a href="#" class="nav-link" data-page="map-page">
+                <div>🗺️</div>
+                <div>Map</div>
+            </a>
+            <a href="#" class="nav-link" data-page="favorites-page">
+                <div>❤️</div>
+                <div>Favorites</div>
+            </a>
+            <a href="#" class="nav-link" data-page="profile-page">
+                <div>👤</div>
+                <div>Profile</div>
+            </a>
+        </nav>
+    </footer>
+
+</div>
+<!-- partial -->
+  <script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js'></script><script  src="./script.js"></script>
+
+</body>
+</html>
