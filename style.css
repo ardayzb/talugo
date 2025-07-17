@@ -12,7 +12,7 @@ body {
 }
 
 .app-container {
-  /* full-screen flex container */
+  /* ── Make the app fill the viewport and stack header/page/footer ── */
   width: 100vw;
   max-width: none;
   height: 100vh;
@@ -24,15 +24,15 @@ body {
   box-shadow: none;
   overflow: hidden;
 
-  /* make room for the fixed footer */
+  /* Reserve space for the fixed footer */
   padding-bottom: 60px;
 }
 
-/* each page takes up the space between header & footer */
+/* Every "page" sits between header & footer */
 .app-container > .page {
   flex: 1;
   overflow: auto;
-  padding: 20px; /* default page padding */
+  padding: 20px;
 }
 
 /* ===== HEADER ===== */
@@ -274,12 +274,8 @@ h1 {
   animation: spin 1s linear infinite;
 }
 @keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 .error-message {
   color: #dc2626;
@@ -321,12 +317,12 @@ footer nav a.active {
 
 /* ===== FULL-SCREEN MAP PAGE ONLY ===== */
 .app-container > #map-page {
-  padding: 0;                    
-  display: flex;                 
+  padding: 0;           /* drop the 20px gutters */
+  display: flex;        /* stack header/map-footer axes */
   flex-direction: column;
 }
 #map-page #map {
-  flex: 1;                       
-  width: 100%;                  
-  border-radius: 0;              /* square corners for full edge-to-edge */
+  flex: 1;              /* grow to fill all available height */
+  width: 100%;          /* edge-to-edge horizontally */
+  border-radius: 0;     /* square corners for full coverage */
 }
