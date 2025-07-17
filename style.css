@@ -316,12 +316,19 @@ footer nav a.active {
 }
 
 /* ===== FULL-SCREEN MAP PAGE ONLY ===== */
-.app-container > #map-page {
-  /* override the inline showPage display:block */
+/* only show as flex when inline style is display:block */
+.app-container > #map-page[style*="display: block"] {
   display: flex !important;
   flex-direction: column;
   padding: 0 !important;
 }
+
+/* explicitly honor the inline display:none when hidden */
+.app-container > #map-page[style*="display: none"] {
+  display: none !important;
+}
+
+/* make the map canvas fill its flex parent */
 #map-page #map {
   flex: 1;
   width: 100%;
