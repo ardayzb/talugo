@@ -30,19 +30,51 @@ const statusContainer = document.querySelector('#status-container'); // NEW
 // --- FUNCTIONS ---
 function initializeMap() {
   if (isMapInitialized) return;
-  map = L.map('map').setView([59.0, 25.5], 7);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-  }).addTo(map);
-  allFarms.forEach(farm => {
-    if (farm.latitude && farm.longitude) {
-      const popupContent = `<b>${farm.name}</b><br>${farm.location}<br><br><button class="details-button-map" data-id="${farm.id}">View Details</button>`;
-      L.marker([farm.latitude, farm.longitude])
-        .addTo(map)
-        .bindPopup(popupContent);
+
+  // Helper to actually build the map
+  const buildMap = (lat, lng, zoom) => {
+    map = L.map('map').setView([lat, lng], zoom);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Optional: show a marker at the user’s location
+    if (zoom > 10) {
+      L.circleMarker([lat, lng], {
+        radius: 8,
+        fillColor: '#16a34a',
+        color: '#fff',
+        weight: 2,
+        opacity: 1,
+        fillOpacity: 0.8
+      }).addTo(map).bindPopup('You are here').openPopup();
     }
-  });
-  isMapInitialized = true;
+
+    // Add your farm markers
+    allFarms.forEach(farm => {
+      if (farm.latitude && farm.longitude) {
+        const popupContent =
+          `<b>${farm.name}</b><br>${farm.location}<br><br>` +
+          `<button class="details-button-map" data-id="${farm.id}">View Details</button>`;
+        L.marker([farm.latitude, farm.longitude])
+         .addTo(map)
+         .bindPopup(popupContent);
+      }
+    });
+
+    isMapInitialized = true;
+  };
+
+  // Try to get user location first
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      ({ coords }) => buildMap(coords.latitude, coords.longitude, 13),
+      ()          => buildMap(59.0, 25.5, 7),
+      { enableHighAccuracy: true, timeout: 5000 }
+    );
+  } else {
+    buildMap(59.0, 25.5, 7);
+  }
 }
 
 function displayProductTags() {
