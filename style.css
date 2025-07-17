@@ -12,7 +12,7 @@ body {
 }
 
 .app-container {
-  /* ── Make the app fill the viewport and stack header/page/footer ── */
+  /* fill the entire viewport and stack header → page → footer */
   width: 100vw;
   max-width: none;
   height: 100vh;
@@ -24,11 +24,11 @@ body {
   box-shadow: none;
   overflow: hidden;
 
-  /* Reserve space for the fixed footer */
+  /* leave room for the fixed footer */
   padding-bottom: 60px;
 }
 
-/* Every "page" sits between header & footer */
+/* every "page" now grows to fill between header & footer */
 .app-container > .page {
   flex: 1;
   overflow: auto;
@@ -102,7 +102,7 @@ h1 {
 /* ===== FARM LISTING ===== */
 #farms-heading {
   font-size: 20px;
-  margin: 32px 20px 16px 20px;
+  margin: 32px 20px 16px;
 }
 .farm-card {
   background-color: #ffffff;
@@ -317,12 +317,13 @@ footer nav a.active {
 
 /* ===== FULL-SCREEN MAP PAGE ONLY ===== */
 .app-container > #map-page {
-  padding: 0;           /* drop the 20px gutters */
-  display: flex;        /* stack header/map-footer axes */
+  /* override the inline showPage display:block */
+  display: flex !important;
   flex-direction: column;
+  padding: 0 !important;
 }
 #map-page #map {
-  flex: 1;              /* grow to fill all available height */
-  width: 100%;          /* edge-to-edge horizontally */
-  border-radius: 0;     /* square corners for full coverage */
+  flex: 1;
+  width: 100%;
+  border-radius: 0;
 }
