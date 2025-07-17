@@ -18,12 +18,10 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-
   background-color: #ffffff;
   border-radius: 0;
   box-shadow: none;
   overflow: hidden;
-
   /* leave room for the fixed footer */
   padding-bottom: 60px;
 }
@@ -140,7 +138,7 @@ h1 {
 /* ─── Unified Details-Button ─── */
 .details-button {
   /* core look (for both <button> and <a>) */
-  display: inline-block;      /* size to content */
+  display: inline-block;      /* size to content by default */
   background-color: #16a34a;
   color: white;
   border: none;
@@ -166,6 +164,16 @@ h1 {
   margin-top: 0;    /* restore original spacing */
 }
 
+/* ─── Details-page full-width override ─── */
+#details-page .details-button {
+  display: block;         /* fill the page’s content width */
+  width: 100%;            /* exactly match the map above */
+  box-sizing: border-box; /* include padding in that width */
+  padding: 12px;          /* vertical padding, same as discover */
+  margin-top: 20px;       /* keep spacing from content above */
+}
+
+/* ===== CARD TAGS ===== */
 .card-tags-container {
   display: flex;
   flex-wrap: wrap;
@@ -218,6 +226,7 @@ h1 {
 #details-page .details-content {
   padding: 20px;
 }
+/* note: removed old #details-page .details-button block */
 
 /* ===== AUTH FORMS ===== */
 #auth-container h3,
@@ -335,12 +344,10 @@ footer nav a.active {
   flex-direction: column;
   padding: 0 !important;
 }
-
 /* explicitly honor the inline display:none when hidden */
 .app-container > #map-page[style*="display: none"] {
   display: none !important;
 }
-
 /* make the map canvas fill its flex parent */
 #map-page #map {
   flex: 1;
