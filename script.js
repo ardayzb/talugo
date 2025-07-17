@@ -68,7 +68,7 @@ function initializeMap() {
   // Try to get user location first
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
-      ({ coords }) => buildMap(coords.latitude, coords.longitude, 6),
+      ({ coords }) => buildMap(coords.latitude, coords.longitude, 10),
       ()          => buildMap(59.0, 25.5, 7),
       { enableHighAccuracy: true, timeout: 5000 }
     );
