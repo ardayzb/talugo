@@ -291,3 +291,11 @@ supabaseClient.auth.onAuthStateChange((_event, session) => {
 // --- INITIAL LOAD ---
 showPage('discover-page');
 fetchAndDisplayFarms();
+
+// PWA: register service worker so browsers will prompt to install
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker
+    .register('/worker.js')
+    .then(() => console.log('Service Worker registered'))
+    .catch(err => console.warn('SW registration failed:', err));
+}
